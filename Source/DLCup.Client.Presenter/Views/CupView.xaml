@@ -1,0 +1,126 @@
+﻿<UserControl x:Class="DLCup.Client.Presenter.Views.CupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lc="clr-namespace:DLCup.Client.Presenter.Converters">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="HomeTeamColor" Color="Firebrick" />
+        <SolidColorBrush x:Key="GuestTeamColor" Color="DarkOrange" />
+        <SolidColorBrush x:Key="NoneColor" Color="LightGray" />
+        
+        <lc:PlayingTeamToColorConverter x:Key="TeamToColorConv"
+                                        HomeTeamColor="{StaticResource HomeTeamColor}"
+                                        GuestTeamColor="{StaticResource GuestTeamColor}"
+                                        NoneColor="{StaticResource NoneColor}"/>
+        
+        <lc:MatchTypeConverter x:Key="MatchTypeConv" />
+        <lc:BoolToVisibilityConverter x:Key="BoolToVisConv" TrueVisibility="Visible" FalseVisibility="Collapsed" />
+    </UserControl.Resources>
+
+    <Grid>
+        <Image Source="/Images/decerno.png" Width="112" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="30" />
+        
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Top" Text="{Binding Path=Model.CupName}" FontSize="64" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,30"/>
+
+            <Grid DockPanel.Dock="Bottom" Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Background="{StaticResource HomeTeamColor}" Padding="5">
+                    <DockPanel Margin="10,0">
+                        <TextBlock DockPanel.Dock="Left" Text="{Binding Path=Model.HomeTeam.TeamName}" FontSize="48" FontWeight="Bold"/>
+                        <TextBlock DockPanel.Dock="Right" Text="{Binding Path=Model.HomeTeamScore}" FontSize="48" FontWeight="Bold" HorizontalAlignment="Right"/>
+                    </DockPanel>
+                </Border>
+
+                <Border Grid.Column="1" Background="{StaticResource GuestTeamColor}" Padding="5">
+                    <DockPanel Margin="10,0">
+                        <TextBlock DockPanel.Dock="Left" Text="{Binding Path=Model.GuestTeamScore}" FontSize="48" FontWeight="Bold"/>
+                        <TextBlock DockPanel.Dock="Right" Text="{Binding Path=Model.GuestTeam.TeamName}" FontSize="48" FontWeight="Bold" HorizontalAlignment="Right"/>
+                    </DockPanel>
+                </Border>
+            </Grid>
+
+            <ItemsControl ItemsSource="{Binding Path=Model.Matches}" HorizontalAlignment="Center">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="250" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="80" />
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" Margin="10,0" Visibility="{Binding Path=IsCurrentlyPlaying, Converter={StaticResource BoolToVisConv}}">
+                                <Image Source="/Images/rackets.png"/>
+                            </Border>
+
+                            <Border Grid.Column="1" Background="LightGray" Margin="10,0">
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding Path=PlayOrder, StringFormat=#{0}}" FontSize="32" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding MatchType, Converter={StaticResource MatchTypeConv}}" FontSize="16" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Grid.Column="2" Margin="10,0">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+
+                                    <Border Grid.Row="0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Ellipse Width="20" Height="20" Fill="{StaticResource HomeTeamColor}" VerticalAlignment="Center" />
+                                            <TextBlock Text="{Binding Path=HomePlayersText}" FontSize="26" Margin="10,0,0,0" VerticalAlignment="Center" />
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Border Grid.Row="1">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Ellipse Width="20" Height="20" Fill="{StaticResource GuestTeamColor}" VerticalAlignment="Center" />
+                                            <TextBlock Text="{Binding Path=GuestPlayersText}" FontSize="26" Margin="10,0,0,0" VerticalAlignment="Center" />
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                            </Border>
+
+                            <Border Grid.Column="3" Margin="10,0">
+                                <ItemsControl ItemsSource="{Binding Path=Games}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Background="{Binding Path=WinningTeam, Converter={StaticResource TeamToColorConv}}" Width="50">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition />
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+
+                                                <TextBlock Grid.Row="0" Text="{Binding Path=HomeScore}" FontSize="32" HorizontalAlignment="Center" />
+                                                <TextBlock Grid.Row="1" Text="{Binding Path=GuestScore}" FontSize="32" HorizontalAlignment="Center" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </Border>
+
+                            <Border Grid.Column="4" Margin="10,0">
+                                <Border Background="{Binding Path=WinningTeam, Converter={StaticResource TeamToColorConv}}">
+                                    <TextBlock Text="{Binding Points, StringFormat={}{0}p}" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3"/>
+                                </Border>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </DockPanel>
+    </Grid>
+</UserControl>

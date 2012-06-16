@@ -1,0 +1,540 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DLCup.Common.Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="DLCupCommonModelStoreContainer">
+          <EntitySet Name="Cup" EntityType="DLCup.Common.Model.Store.Cup" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Game" EntityType="DLCup.Common.Model.Store.Game" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Match" EntityType="DLCup.Common.Model.Store.Match" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Player" EntityType="DLCup.Common.Model.Store.Player" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Team" EntityType="DLCup.Common.Model.Store.Team" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Cup_GuestTeam" Association="DLCup.Common.Model.Store.FK_Cup_GuestTeam">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Cup" EntitySet="Cup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cup_HomeTeam" Association="DLCup.Common.Model.Store.FK_Cup_HomeTeam">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Cup" EntitySet="Cup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_Match" Association="DLCup.Common.Model.Store.FK_Game_Match">
+            <End Role="Match" EntitySet="Match" />
+            <End Role="Game" EntitySet="Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_Cup" Association="DLCup.Common.Model.Store.FK_Match_Cup">
+            <End Role="Cup" EntitySet="Cup" />
+            <End Role="Match" EntitySet="Match" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_PrimaryGuestPlayer" Association="DLCup.Common.Model.Store.FK_Match_PrimaryGuestPlayer">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="Match" EntitySet="Match" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_PrimaryHomePlayer" Association="DLCup.Common.Model.Store.FK_Match_PrimaryHomePlayer">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="Match" EntitySet="Match" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_SecondaryGuestPlayer" Association="DLCup.Common.Model.Store.FK_Match_SecondaryGuestPlayer">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="Match" EntitySet="Match" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_SecondaryHomePlayer" Association="DLCup.Common.Model.Store.FK_Match_SecondaryHomePlayer">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="Match" EntitySet="Match" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Player_Team" Association="DLCup.Common.Model.Store.FK_Player_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Player" EntitySet="Player" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cup">
+          <Key>
+            <PropertyRef Name="CupId" />
+          </Key>
+          <Property Name="CupId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CupName" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="CupDate" Type="datetime" Nullable="false" />
+          <Property Name="HomeTeamId" Type="int" Nullable="false" />
+          <Property Name="GuestTeamId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="GameId" />
+          </Key>
+          <Property Name="GameId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="MatchId" Type="int" Nullable="false" />
+          <Property Name="HomeScore" Type="int" />
+          <Property Name="GuestScore" Type="int" />
+        </EntityType>
+        <EntityType Name="Match">
+          <Key>
+            <PropertyRef Name="MatchId" />
+          </Key>
+          <Property Name="MatchId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CupId" Type="int" Nullable="false" />
+          <Property Name="MatchType" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="Points" Type="int" Nullable="false" />
+          <Property Name="PlayOrder" Type="int" Nullable="false" />
+          <Property Name="PrimaryHomePlayerId" Type="int" />
+          <Property Name="SecondaryHomePlayerId" Type="int" />
+          <Property Name="PrimaryGuestPlayerId" Type="int" />
+          <Property Name="SecondaryGuestPlayerId" Type="int" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="PlayerId" />
+          </Key>
+          <Property Name="PlayerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PlayerName" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="TeamId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="TeamId" />
+          </Key>
+          <Property Name="TeamId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TeamName" Type="varchar" Nullable="false" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK_Cup_GuestTeam">
+          <End Role="Team" Type="DLCup.Common.Model.Store.Team" Multiplicity="1" />
+          <End Role="Cup" Type="DLCup.Common.Model.Store.Cup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="Cup">
+              <PropertyRef Name="GuestTeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cup_HomeTeam">
+          <End Role="Team" Type="DLCup.Common.Model.Store.Team" Multiplicity="1" />
+          <End Role="Cup" Type="DLCup.Common.Model.Store.Cup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="Cup">
+              <PropertyRef Name="HomeTeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Game_Match">
+          <End Role="Match" Type="DLCup.Common.Model.Store.Match" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Game" Type="DLCup.Common.Model.Store.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match">
+              <PropertyRef Name="MatchId" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="MatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_Cup">
+          <End Role="Cup" Type="DLCup.Common.Model.Store.Cup" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Match" Type="DLCup.Common.Model.Store.Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cup">
+              <PropertyRef Name="CupId" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="CupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_PrimaryGuestPlayer">
+          <End Role="Player" Type="DLCup.Common.Model.Store.Player" Multiplicity="0..1" />
+          <End Role="Match" Type="DLCup.Common.Model.Store.Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="PlayerId" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="PrimaryGuestPlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_PrimaryHomePlayer">
+          <End Role="Player" Type="DLCup.Common.Model.Store.Player" Multiplicity="0..1" />
+          <End Role="Match" Type="DLCup.Common.Model.Store.Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="PlayerId" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="PrimaryHomePlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_SecondaryGuestPlayer">
+          <End Role="Player" Type="DLCup.Common.Model.Store.Player" Multiplicity="0..1" />
+          <End Role="Match" Type="DLCup.Common.Model.Store.Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="PlayerId" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="SecondaryGuestPlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_SecondaryHomePlayer">
+          <End Role="Player" Type="DLCup.Common.Model.Store.Player" Multiplicity="0..1" />
+          <End Role="Match" Type="DLCup.Common.Model.Store.Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="PlayerId" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="SecondaryHomePlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Player_Team">
+          <End Role="Team" Type="DLCup.Common.Model.Store.Team" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Player" Type="DLCup.Common.Model.Store.Player" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="Player">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DLCup.Common.Model" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="DLCupEntities">
+          <EntitySet Name="Cups" EntityType="DLCup.Common.Model.Cup" />
+          <EntitySet Name="Games" EntityType="DLCup.Common.Model.Game" />
+          <EntitySet Name="Matches" EntityType="DLCup.Common.Model.Match" />
+          <EntitySet Name="Players" EntityType="DLCup.Common.Model.Player" />
+          <EntitySet Name="Teams" EntityType="DLCup.Common.Model.Team" />
+          <AssociationSet Name="FK_Cup_GuestTeam" Association="DLCup.Common.Model.FK_Cup_GuestTeam">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="Cup" EntitySet="Cups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cup_HomeTeam" Association="DLCup.Common.Model.FK_Cup_HomeTeam">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="Cup" EntitySet="Cups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_Cup" Association="DLCup.Common.Model.FK_Match_Cup">
+            <End Role="Cup" EntitySet="Cups" />
+            <End Role="Match" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_Match" Association="DLCup.Common.Model.FK_Game_Match">
+            <End Role="Match" EntitySet="Matches" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_PrimaryGuestPlayer" Association="DLCup.Common.Model.FK_Match_PrimaryGuestPlayer">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="Match" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_PrimaryHomePlayer" Association="DLCup.Common.Model.FK_Match_PrimaryHomePlayer">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="Match" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_SecondaryGuestPlayer" Association="DLCup.Common.Model.FK_Match_SecondaryGuestPlayer">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="Match" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_SecondaryHomePlayer" Association="DLCup.Common.Model.FK_Match_SecondaryHomePlayer">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="Match" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Player_Team" Association="DLCup.Common.Model.FK_Player_Team">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="Player" EntitySet="Players" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cup">
+          <Key>
+            <PropertyRef Name="CupId" />
+          </Key>
+          <Property Type="Int32" Name="CupId" Nullable="false" />
+          <Property Type="DateTime" Name="CupDate" Nullable="false" />
+          <NavigationProperty Name="GuestTeam" Relationship="DLCup.Common.Model.FK_Cup_GuestTeam" FromRole="Cup" ToRole="Team" />
+          <NavigationProperty Name="HomeTeam" Relationship="DLCup.Common.Model.FK_Cup_HomeTeam" FromRole="Cup" ToRole="Team" />
+          <NavigationProperty Name="Matches" Relationship="DLCup.Common.Model.FK_Match_Cup" FromRole="Cup" ToRole="Match" />
+          <Property Type="String" Name="CupName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="GameId" />
+          </Key>
+          <Property Type="Int32" Name="GameId" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="HomeScore" />
+          <Property Type="Int32" Name="GuestScore" />
+          <NavigationProperty Name="Match" Relationship="DLCup.Common.Model.FK_Game_Match" FromRole="Game" ToRole="Match" />
+        </EntityType>
+        <EntityType Name="Match">
+          <Key>
+            <PropertyRef Name="MatchId" />
+          </Key>
+          <Property Type="Int32" Name="MatchId" Nullable="false" />
+          <NavigationProperty Name="Cup" Relationship="DLCup.Common.Model.FK_Match_Cup" FromRole="Match" ToRole="Cup" />
+          <NavigationProperty Name="Games" Relationship="DLCup.Common.Model.FK_Game_Match" FromRole="Match" ToRole="Game" />
+          <NavigationProperty Name="PrimaryGuestPlayer" Relationship="DLCup.Common.Model.FK_Match_PrimaryGuestPlayer" FromRole="Match" ToRole="Player" />
+          <NavigationProperty Name="PrimaryHomePlayer" Relationship="DLCup.Common.Model.FK_Match_PrimaryHomePlayer" FromRole="Match" ToRole="Player" />
+          <NavigationProperty Name="SecondaryGuestPlayer" Relationship="DLCup.Common.Model.FK_Match_SecondaryGuestPlayer" FromRole="Match" ToRole="Player" />
+          <NavigationProperty Name="SecondaryHomePlayer" Relationship="DLCup.Common.Model.FK_Match_SecondaryHomePlayer" FromRole="Match" ToRole="Player" />
+          <Property Type="Int32" Name="Points" Nullable="false" />
+          <Property Type="Int32" Name="PlayOrder" Nullable="false" />
+          <Property Type="String" Name="MatchType" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="PlayerId" />
+          </Key>
+          <Property Type="Int32" Name="PlayerId" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="PlayerName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Team" Relationship="DLCup.Common.Model.FK_Player_Team" FromRole="Player" ToRole="Team" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="TeamId" />
+          </Key>
+          <Property Type="Int32" Name="TeamId" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="TeamName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Players" Relationship="DLCup.Common.Model.FK_Player_Team" FromRole="Team" ToRole="Player" />
+        </EntityType>
+        <Association Name="FK_Cup_GuestTeam">
+          <End Type="DLCup.Common.Model.Team" Role="Team" Multiplicity="1" />
+          <End Type="DLCup.Common.Model.Cup" Role="Cup" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Cup_HomeTeam">
+          <End Type="DLCup.Common.Model.Team" Role="Team" Multiplicity="1" />
+          <End Type="DLCup.Common.Model.Cup" Role="Cup" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Match_Cup">
+          <End Type="DLCup.Common.Model.Cup" Role="Cup" Multiplicity="1" />
+          <End Type="DLCup.Common.Model.Match" Role="Match" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Game_Match">
+          <End Type="DLCup.Common.Model.Match" Role="Match" Multiplicity="1" />
+          <End Type="DLCup.Common.Model.Game" Role="Game" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Match_PrimaryGuestPlayer">
+          <End Type="DLCup.Common.Model.Player" Role="Player" Multiplicity="0..1" />
+          <End Type="DLCup.Common.Model.Match" Role="Match" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Match_PrimaryHomePlayer">
+          <End Type="DLCup.Common.Model.Player" Role="Player" Multiplicity="0..1" />
+          <End Type="DLCup.Common.Model.Match" Role="Match" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Match_SecondaryGuestPlayer">
+          <End Type="DLCup.Common.Model.Player" Role="Player" Multiplicity="0..1" />
+          <End Type="DLCup.Common.Model.Match" Role="Match" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Match_SecondaryHomePlayer">
+          <End Type="DLCup.Common.Model.Player" Role="Player" Multiplicity="0..1" />
+          <End Type="DLCup.Common.Model.Match" Role="Match" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Player_Team">
+          <End Type="DLCup.Common.Model.Team" Role="Team" Multiplicity="1" />
+          <End Type="DLCup.Common.Model.Player" Role="Player" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DLCupCommonModelStoreContainer" CdmEntityContainer="DLCupEntities">
+          <EntitySetMapping Name="Cups">
+            <EntityTypeMapping TypeName="DLCup.Common.Model.Cup">
+              <MappingFragment StoreEntitySet="Cup">
+                <ScalarProperty Name="CupName" ColumnName="CupName" />
+                <ScalarProperty Name="CupDate" ColumnName="CupDate" />
+                <ScalarProperty Name="CupId" ColumnName="CupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Games">
+            <EntityTypeMapping TypeName="DLCup.Common.Model.Game">
+              <MappingFragment StoreEntitySet="Game">
+                <ScalarProperty Name="GuestScore" ColumnName="GuestScore" />
+                <ScalarProperty Name="HomeScore" ColumnName="HomeScore" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matches">
+            <EntityTypeMapping TypeName="DLCup.Common.Model.Match">
+              <MappingFragment StoreEntitySet="Match">
+                <ScalarProperty Name="MatchType" ColumnName="MatchType" />
+                <ScalarProperty Name="PlayOrder" ColumnName="PlayOrder" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="MatchId" ColumnName="MatchId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Players">
+            <EntityTypeMapping TypeName="DLCup.Common.Model.Player">
+              <MappingFragment StoreEntitySet="Player">
+                <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="DLCup.Common.Model.Team">
+              <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_Cup_GuestTeam" TypeName="DLCup.Common.Model.FK_Cup_GuestTeam" StoreEntitySet="Cup">
+            <EndProperty Name="Cup">
+              <ScalarProperty Name="CupId" ColumnName="CupId" />
+            </EndProperty>
+            <EndProperty Name="Team">
+              <ScalarProperty Name="TeamId" ColumnName="GuestTeamId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Cup_HomeTeam" TypeName="DLCup.Common.Model.FK_Cup_HomeTeam" StoreEntitySet="Cup">
+            <EndProperty Name="Cup">
+              <ScalarProperty Name="CupId" ColumnName="CupId" />
+            </EndProperty>
+            <EndProperty Name="Team">
+              <ScalarProperty Name="TeamId" ColumnName="HomeTeamId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Match_Cup" TypeName="DLCup.Common.Model.FK_Match_Cup" StoreEntitySet="Match">
+            <EndProperty Name="Match">
+              <ScalarProperty Name="MatchId" ColumnName="MatchId" />
+            </EndProperty>
+            <EndProperty Name="Cup">
+              <ScalarProperty Name="CupId" ColumnName="CupId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Game_Match" TypeName="DLCup.Common.Model.FK_Game_Match" StoreEntitySet="Game">
+            <EndProperty Name="Game">
+              <ScalarProperty Name="GameId" ColumnName="GameId" />
+            </EndProperty>
+            <EndProperty Name="Match">
+              <ScalarProperty Name="MatchId" ColumnName="MatchId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Match_PrimaryGuestPlayer" TypeName="DLCup.Common.Model.FK_Match_PrimaryGuestPlayer" StoreEntitySet="Match">
+            <EndProperty Name="Match">
+              <ScalarProperty Name="MatchId" ColumnName="MatchId" />
+            </EndProperty>
+            <EndProperty Name="Player">
+              <ScalarProperty Name="PlayerId" ColumnName="PrimaryGuestPlayerId" />
+            </EndProperty>
+            <Condition ColumnName="PrimaryGuestPlayerId" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Match_PrimaryHomePlayer" TypeName="DLCup.Common.Model.FK_Match_PrimaryHomePlayer" StoreEntitySet="Match">
+            <EndProperty Name="Match">
+              <ScalarProperty Name="MatchId" ColumnName="MatchId" />
+            </EndProperty>
+            <EndProperty Name="Player">
+              <ScalarProperty Name="PlayerId" ColumnName="PrimaryHomePlayerId" />
+            </EndProperty>
+            <Condition ColumnName="PrimaryHomePlayerId" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Match_SecondaryGuestPlayer" TypeName="DLCup.Common.Model.FK_Match_SecondaryGuestPlayer" StoreEntitySet="Match">
+            <EndProperty Name="Match">
+              <ScalarProperty Name="MatchId" ColumnName="MatchId" />
+            </EndProperty>
+            <EndProperty Name="Player">
+              <ScalarProperty Name="PlayerId" ColumnName="SecondaryGuestPlayerId" />
+            </EndProperty>
+            <Condition ColumnName="SecondaryGuestPlayerId" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Match_SecondaryHomePlayer" TypeName="DLCup.Common.Model.FK_Match_SecondaryHomePlayer" StoreEntitySet="Match">
+            <EndProperty Name="Match">
+              <ScalarProperty Name="MatchId" ColumnName="MatchId" />
+            </EndProperty>
+            <EndProperty Name="Player">
+              <ScalarProperty Name="PlayerId" ColumnName="SecondaryHomePlayerId" />
+            </EndProperty>
+            <Condition ColumnName="SecondaryHomePlayerId" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Player_Team" TypeName="DLCup.Common.Model.FK_Player_Team" StoreEntitySet="Player">
+            <EndProperty Name="Player">
+              <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+            </EndProperty>
+            <EndProperty Name="Team">
+              <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="DB">
+        <EntityTypeShape EntityType="DLCup.Common.Model.Cup" Width="1.5" PointX="3.25" PointY="1.625" Height="1.9210009765625" />
+        <EntityTypeShape EntityType="DLCup.Common.Model.Game" Width="1.5" PointX="8" PointY="3.375" Height="1.5923063151041674" />
+        <EntityTypeShape EntityType="DLCup.Common.Model.Match" Width="1.5" PointX="5.625" PointY="3" Height="2.4140429687499996" />
+        <EntityTypeShape EntityType="DLCup.Common.Model.Player" Width="1.5" PointX="3" PointY="3.875" Height="1.4279589843749996" />
+        <EntityTypeShape EntityType="DLCup.Common.Model.Team" Width="1.5" PointX="0.75" PointY="2.625" Height="1.4279589843749996" />
+        <AssociationConnector Association="DLCup.Common.Model.FK_Cup_GuestTeam" >
+          <ConnectorPoint PointX="2.25" PointY="3.2318756103515622" />
+          <ConnectorPoint PointX="3.25" PointY="3.2318756103515622" />
+        </AssociationConnector>
+        <AssociationConnector Association="DLCup.Common.Model.FK_Cup_HomeTeam" >
+          <ConnectorPoint PointX="2.25" PointY="2.8659378051757809" />
+          <ConnectorPoint PointX="3.25" PointY="2.8659378051757809" />
+        </AssociationConnector>
+        <AssociationConnector Association="DLCup.Common.Model.FK_Match_Cup" >
+          <ConnectorPoint PointX="4.75" PointY="3.27300048828125" />
+          <ConnectorPoint PointX="5.625" PointY="3.27300048828125" />
+        </AssociationConnector>
+        <AssociationConnector Association="DLCup.Common.Model.FK_Game_Match" >
+          <ConnectorPoint PointX="7.125" PointY="4.1711531575520837" />
+          <ConnectorPoint PointX="8" PointY="4.1711531575520837" />
+        </AssociationConnector>
+        <AssociationConnector Association="DLCup.Common.Model.FK_Match_PrimaryGuestPlayer" >
+          <ConnectorPoint PointX="4.5" PointY="4.5889794921875" />
+          <ConnectorPoint PointX="5.625" PointY="4.5889794921875" />
+        </AssociationConnector>
+        <AssociationConnector Association="DLCup.Common.Model.FK_Match_PrimaryHomePlayer" >
+          <ConnectorPoint PointX="4.5" PointY="4.1170535278320308" />
+          <ConnectorPoint PointX="5.625" PointY="4.1170535278320308" />
+        </AssociationConnector>
+        <AssociationConnector Association="DLCup.Common.Model.FK_Match_SecondaryGuestPlayer" >
+          <ConnectorPoint PointX="4.5" PointY="5.00846923828125" />
+          <ConnectorPoint PointX="5.625" PointY="5.00846923828125" />
+        </AssociationConnector>
+        <AssociationConnector Association="DLCup.Common.Model.FK_Match_SecondaryHomePlayer" >
+          <ConnectorPoint PointX="4.5" PointY="4.7987243652343743" />
+          <ConnectorPoint PointX="5.625" PointY="4.7987243652343743" />
+        </AssociationConnector>
+        <AssociationConnector Association="DLCup.Common.Model.FK_Player_Team" >
+          <ConnectorPoint PointX="1.5" PointY="4.052958984375" />
+          <ConnectorPoint PointX="1.5" PointY="4.677959484375" />
+          <ConnectorPoint PointX="3" PointY="4.677959484375" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

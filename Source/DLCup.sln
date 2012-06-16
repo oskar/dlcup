@@ -1,0 +1,79 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLCup.Client.Presenter", "DLCup.Client.Presenter\DLCup.Client.Presenter.csproj", "{44359E7B-4F90-451D-A297-B43FF546CEC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLCup.Common.Model", "DLCup.Common.Model\DLCup.Common.Model.csproj", "{79035AAC-1E27-48CF-8556-73D229EFBC33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLCup.Tests.UnitTest", "DLCup.Tests.UnitTest\DLCup.Tests.UnitTest.csproj", "{33DBDB58-2E7C-4D52-8438-71D6C3AE0E59}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2FE64A57-D238-4E81-9BA0-843398DE3191}"
+	ProjectSection(SolutionItems) = preProject
+		DLCup.vsmdi = DLCup.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLCup.Client.Controller", "DLCup.Client.Controller\DLCup.Client.Controller.csproj", "{B6D4EE71-471F-40D3-AB58-0A7B98865ED6}"
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = DLCup.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{44359E7B-4F90-451D-A297-B43FF546CEC7}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{44359E7B-4F90-451D-A297-B43FF546CEC7}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{44359E7B-4F90-451D-A297-B43FF546CEC7}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{44359E7B-4F90-451D-A297-B43FF546CEC7}.Debug|x86.ActiveCfg = Debug|x86
+		{44359E7B-4F90-451D-A297-B43FF546CEC7}.Debug|x86.Build.0 = Debug|x86
+		{44359E7B-4F90-451D-A297-B43FF546CEC7}.Release|Any CPU.ActiveCfg = Release|x86
+		{44359E7B-4F90-451D-A297-B43FF546CEC7}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{44359E7B-4F90-451D-A297-B43FF546CEC7}.Release|Mixed Platforms.Build.0 = Release|x86
+		{44359E7B-4F90-451D-A297-B43FF546CEC7}.Release|x86.ActiveCfg = Release|x86
+		{44359E7B-4F90-451D-A297-B43FF546CEC7}.Release|x86.Build.0 = Release|x86
+		{79035AAC-1E27-48CF-8556-73D229EFBC33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79035AAC-1E27-48CF-8556-73D229EFBC33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79035AAC-1E27-48CF-8556-73D229EFBC33}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{79035AAC-1E27-48CF-8556-73D229EFBC33}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{79035AAC-1E27-48CF-8556-73D229EFBC33}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{79035AAC-1E27-48CF-8556-73D229EFBC33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79035AAC-1E27-48CF-8556-73D229EFBC33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79035AAC-1E27-48CF-8556-73D229EFBC33}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{79035AAC-1E27-48CF-8556-73D229EFBC33}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{79035AAC-1E27-48CF-8556-73D229EFBC33}.Release|x86.ActiveCfg = Release|Any CPU
+		{33DBDB58-2E7C-4D52-8438-71D6C3AE0E59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33DBDB58-2E7C-4D52-8438-71D6C3AE0E59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33DBDB58-2E7C-4D52-8438-71D6C3AE0E59}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{33DBDB58-2E7C-4D52-8438-71D6C3AE0E59}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{33DBDB58-2E7C-4D52-8438-71D6C3AE0E59}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{33DBDB58-2E7C-4D52-8438-71D6C3AE0E59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33DBDB58-2E7C-4D52-8438-71D6C3AE0E59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33DBDB58-2E7C-4D52-8438-71D6C3AE0E59}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{33DBDB58-2E7C-4D52-8438-71D6C3AE0E59}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{33DBDB58-2E7C-4D52-8438-71D6C3AE0E59}.Release|x86.ActiveCfg = Release|Any CPU
+		{B6D4EE71-471F-40D3-AB58-0A7B98865ED6}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{B6D4EE71-471F-40D3-AB58-0A7B98865ED6}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{B6D4EE71-471F-40D3-AB58-0A7B98865ED6}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{B6D4EE71-471F-40D3-AB58-0A7B98865ED6}.Debug|x86.ActiveCfg = Debug|x86
+		{B6D4EE71-471F-40D3-AB58-0A7B98865ED6}.Debug|x86.Build.0 = Debug|x86
+		{B6D4EE71-471F-40D3-AB58-0A7B98865ED6}.Release|Any CPU.ActiveCfg = Release|x86
+		{B6D4EE71-471F-40D3-AB58-0A7B98865ED6}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{B6D4EE71-471F-40D3-AB58-0A7B98865ED6}.Release|Mixed Platforms.Build.0 = Release|x86
+		{B6D4EE71-471F-40D3-AB58-0A7B98865ED6}.Release|x86.ActiveCfg = Release|x86
+		{B6D4EE71-471F-40D3-AB58-0A7B98865ED6}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
+	EndGlobalSection
+EndGlobal
