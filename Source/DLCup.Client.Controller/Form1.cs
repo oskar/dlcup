@@ -4,17 +4,18 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using DLCup.Client.Controller;
 
 namespace DLCupController
 {
     public partial class frmMain : Form
     {
-        private string connectionString;
+        private string _connectionString;
 
         public frmMain()
         {
             InitializeComponent();
-            connectionString = ConfigurationManager.ConnectionStrings["DLCup"].ConnectionString;
+            _connectionString = ConfigurationManager.ConnectionStrings["DLCup"].ConnectionString;
 
             cboMatch.DisplayMember = "Value";
             cboSet.DisplayMember = "Value";
@@ -29,7 +30,7 @@ namespace DLCupController
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(connectionString))
+                using (SqlConnection con = new SqlConnection(_connectionString))
                 {
                     con.Open();
                     SqlCommand command = con.CreateCommand();
@@ -86,14 +87,17 @@ namespace DLCupController
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(connectionString))
+                var cupId = AppSettingsHelper.GetValue("CupId", 1);
+
+                using (SqlConnection con = new SqlConnection(_connectionString))
                 {
                     con.Open();
                     SqlCommand matchQ = con.CreateCommand();
                     SqlCommand gameQ = con.CreateCommand();
 
                     matchQ.CommandType = CommandType.Text;
-                    matchQ.CommandText = @"select MatchId, MatchType + ' (' + cast(Points as varchar(10)) + 'p)' from Match where CupId = 1 order by PlayOrder asc";
+                    matchQ.CommandText = @"select MatchId, MatchType + ' (' + cast(Points as varchar(10)) + 'p)' from Match where CupId = @CupId order by PlayOrder asc";
+                    matchQ.Parameters.Add("@CupId", SqlDbType.Int).Value = cupId;
 
                     SqlDataReader matchR = matchQ.ExecuteReader();
                     cboMatch.Items.Clear();
@@ -128,7 +132,7 @@ namespace DLCupController
             {
                 DictionaryEntry matchDe = (DictionaryEntry)cboMatch.SelectedItem;
 
-                using (SqlConnection con = new SqlConnection(connectionString))
+                using (SqlConnection con = new SqlConnection(_connectionString))
                 {
                     con.Open();
                     SqlCommand gameQ = con.CreateCommand();

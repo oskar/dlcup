@@ -86,7 +86,9 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="DB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DB.Context.cs</LastGenOutput>

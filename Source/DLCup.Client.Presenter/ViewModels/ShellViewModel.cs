@@ -34,7 +34,9 @@ namespace DLCup.Client.Presenter.ViewModels
 
         private void ExecuteShowCupView()
         {
-            _cupView.SetCupIdAndStartRefreshData(1); // TODO
+            var cupId = AppSettingsHelper.GetValue("CupId", 1);
+
+            _cupView.SetCupIdAndStartRefreshData(cupId);
             SelectedView = _cupView;
         }
     }

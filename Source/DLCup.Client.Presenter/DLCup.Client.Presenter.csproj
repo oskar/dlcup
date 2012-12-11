@@ -89,6 +89,7 @@
       <HintPath>..\packages\Unity.2.1.505.0\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Windows.Interactivity">
@@ -108,6 +109,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AppSettingsHelper.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\MatchTypeConverter.cs" />
     <Compile Include="Converters\PlayingTeamToColorConverter.cs" />
@@ -129,7 +131,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="DataAccessor.cs" />
     <Page Include="Views\CupView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
