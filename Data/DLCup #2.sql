@@ -44,10 +44,19 @@ inner join Cup c on c.CupId = m.CupId
 where c.CupName = 'DL Cup #2'
 order by m.MatchId, GameId
 
+
+S Martin
+S Matti
+S Andreas
+S 
+D Andreas och Martin
+D Matti och Andreas
+
+
 -- Tilldela spelare till varje match
 update m
 set PrimaryHomePlayerId = (select PlayerId from Player where PlayerName = 'Oskar R'),
-    PrimaryGuestPlayerId = (select PlayerId from Player where PlayerName = '')
+    PrimaryGuestPlayerId = (select PlayerId from Player where PlayerName = 'Martin')
 --select count(*)
 from Match m
 inner join Cup c on c.CupId = m.CupId
@@ -55,7 +64,7 @@ where c.CupName = 'DL Cup #2' and m.PlayOrder = 1
 
 update m
 set PrimaryHomePlayerId = (select PlayerId from Player where PlayerName = 'Marcus'),
-    PrimaryGuestPlayerId = (select PlayerId from Player where PlayerName = '')
+    PrimaryGuestPlayerId = (select PlayerId from Player where PlayerName = 'Matti')
 --select count(*)
 from Match m
 inner join Cup c on c.CupId = m.CupId
@@ -63,7 +72,7 @@ where c.CupName = 'DL Cup #2' and m.PlayOrder = 2
 
 update m
 set PrimaryHomePlayerId = (select PlayerId from Player where PlayerName = 'Karin'),
-    PrimaryGuestPlayerId = (select PlayerId from Player where PlayerName = '')
+    PrimaryGuestPlayerId = (select PlayerId from Player where PlayerName = 'Andreas')
 --select count(*)
 from Match m
 inner join Cup c on c.CupId = m.CupId
@@ -71,7 +80,7 @@ where c.CupName = 'DL Cup #2' and m.PlayOrder = 3
 
 update m
 set PrimaryHomePlayerId = (select PlayerId from Player where PlayerName = 'Björn'),
-    PrimaryGuestPlayerId = (select PlayerId from Player where PlayerName = '')
+    PrimaryGuestPlayerId = (select PlayerId from Player where PlayerName = 'Martin')
 --select count(*)
 from Match m
 inner join Cup c on c.CupId = m.CupId
@@ -80,8 +89,8 @@ where c.CupName = 'DL Cup #2' and m.PlayOrder = 4
 update m
 set PrimaryHomePlayerId = (select PlayerId from Player where PlayerName = 'Karin'),
     SecondaryHomePlayerId = (select PlayerId from Player where PlayerName = 'Oskar R'),
-    PrimaryGuestPlayerId = (select PlayerId from Player where PlayerName = ''),
-    SecondaryGuestPlayerId = (select PlayerId from Player where PlayerName = '')
+    PrimaryGuestPlayerId = (select PlayerId from Player where PlayerName = 'Andreas'),
+    SecondaryGuestPlayerId = (select PlayerId from Player where PlayerName = 'Martin')
 --select count(*)
 from Match m
 inner join Cup c on c.CupId = m.CupId
@@ -90,8 +99,8 @@ where c.CupName = 'DL Cup #2' and m.PlayOrder = 5
 update m
 set PrimaryHomePlayerId = (select PlayerId from Player where PlayerName = 'Marcus'),
     SecondaryHomePlayerId = (select PlayerId from Player where PlayerName = 'Björn'),
-    PrimaryGuestPlayerId = (select PlayerId from Player where PlayerName = ''),
-    SecondaryGuestPlayerId = (select PlayerId from Player where PlayerName = '')
+    PrimaryGuestPlayerId = (select PlayerId from Player where PlayerName = 'Matti'),
+    SecondaryGuestPlayerId = (select PlayerId from Player where PlayerName = 'Andreas')
 --select count(*)
 from Match m
 inner join Cup c on c.CupId = m.CupId
